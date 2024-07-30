@@ -27,6 +27,7 @@ import androidx.annotation.Nullable;
 import androidx.browser.customtabs.CustomTabColorSchemeParams;
 import androidx.browser.customtabs.CustomTabsCallback;
 import androidx.browser.customtabs.CustomTabsIntent;
+import androidx.browser.customtabs.CustomTabsSession;
 import androidx.browser.trusted.TrustedWebActivityDisplayMode;
 import androidx.browser.trusted.TrustedWebActivityIntentBuilder;
 import androidx.browser.trusted.TrustedWebActivityService;
@@ -117,6 +118,10 @@ public class LauncherActivity extends Activity {
 
     @Nullable
     private TwaLauncher mTwaLauncher;
+
+    protected CustomTabsSession getCustomTabsSession() {
+        return mTwaLauncher.mSession;
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

@@ -90,7 +90,7 @@ public class TwaLauncher {
     private TwaCustomTabsServiceConnection mServiceConnection;
 
     @Nullable
-    private CustomTabsSession mSession;
+    public CustomTabsSession mSession;
 
     private TokenStore mTokenStore;
 
@@ -317,10 +317,8 @@ public class TwaLauncher {
         @Override
         public void onCustomTabsServiceConnected(ComponentName componentName,
                 CustomTabsClient client) {
-            if (!ChromeLegacyUtils
-                    .supportsLaunchWithoutWarmup(mContext.getPackageManager(), mProviderPackage)) {
-                client.warmup(0);
-            }
+            // Always warmup to allow Custom Tab post messages
+            client.warmup(0L);
 
             try {
                 mSession = client.newSession(mCustomTabsCallback, mSessionId);

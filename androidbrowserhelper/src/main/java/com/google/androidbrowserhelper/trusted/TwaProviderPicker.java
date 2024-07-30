@@ -140,6 +140,15 @@ public class TwaProviderPicker {
 
         Map<String, Integer> customTabsServices = getLaunchModesForCustomTabsServices(pm);
 
+        String chromePackageName = "com.android.chrome";
+        if (customTabsServices.containsKey(chromePackageName)) {
+            @LaunchMode int launchMode = customTabsServices.get(chromePackageName);
+            if (launchMode == LaunchMode.TRUSTED_WEB_ACTIVITY || launchMode == LaunchMode.CUSTOM_TAB) {
+                Log.d(TAG, "Found Chrome, finishing search: " + chromePackageName);
+                return new Action(launchMode, chromePackageName);
+            }
+        }
+
         for (ResolveInfo possibleProvider : possibleProviders) {
             String providerName = possibleProvider.activityInfo.packageName;
 
