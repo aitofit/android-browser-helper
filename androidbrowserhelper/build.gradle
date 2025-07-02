@@ -128,3 +128,10 @@ publishing {
         }
     }
 }
+
+// Ensure publication waits for the AAR to be built
+afterEvaluate {
+    tasks.named("publishProductionPublicationToMavenLocal") {
+        dependsOn tasks.named("bundleReleaseAar")
+    }
+}

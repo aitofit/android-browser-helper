@@ -105,3 +105,9 @@ publishing {
         }
     }
 }
+
+afterEvaluate {
+    tasks.named("publishProductionPublicationToMavenLocal") {
+        dependsOn tasks.named("bundleReleaseAar")
+    }
+}
